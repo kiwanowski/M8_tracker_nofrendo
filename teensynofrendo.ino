@@ -95,7 +95,7 @@ void setup() {
 
   emu_init(); 
 
-  myTimer.begin(vblCount, 20000);  //to run every 20ms  
+  myTimer.begin(vblCount, 16666);  // 60Hz = 1/0.016666
 
   Wire1.begin();
   

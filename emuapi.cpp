@@ -25,7 +25,6 @@ static const int16_t * logo = deflogo;
 #include "bmptft.h"
 #endif
 
-
 #ifdef HAS_I2CKBD
 #include <Wire.h>
 #endif
@@ -151,7 +150,6 @@ const unsigned short menutouchactions[] = {
   MKEY_UP,MKEY_DOWN,ACTION_NONE,MKEY_JOY,
   MKEY_TFT,MKEY_VGA}; 
 
-
 static int keypadval=0; 
 static boolean joySwapped = false;
 static uint16_t bLastState;
@@ -162,7 +160,6 @@ static uint8_t prev_zt=0;
 static bool menuOn=true;
 static bool callibrationOn=false;
 static int callibrationStep=0;
-
 
 static char captureTouchZone(const unsigned short * areas, const unsigned short * actions, int *rx, int *ry, int *rw, int * rh) {
     uint16_t xt=0;
@@ -236,13 +233,6 @@ static char captureTouchZone(const unsigned short * areas, const unsigned short 
     return ACTION_NONE;   
 } 
 
-
-
-
-
-
-
-
 void emu_printf(char * text)
 {
   Serial.println(text);
@@ -310,10 +300,6 @@ void emu_Free(void * pt)
   free(pt);
 }
 
-
-
-
-
 int emu_ReadAnalogJoyX(int min, int max) 
 {
   int val = analogRead(PIN_JOY2_A1X);
@@ -358,7 +344,6 @@ static uint16_t readAnalogJoystick(void)
   return (joysval);     
 }
 
-
 int emu_SwapJoysticks(int statusOnly) {
   if (!statusOnly) {
     if (joySwapped) {
@@ -390,7 +375,6 @@ int emu_ReadKeys(void)
   inputs = Wire1.read();
   
   // Second joystick
-
 
   if ( ~inputs & 0b01000000 ) j2 |= MASK_JOY2_UP;
   if ( ~inputs & 0b00100000 ) j2 |= MASK_JOY2_DOWN;
@@ -524,14 +508,11 @@ void emu_InitJoysticks(void) {
   yRef /= 10; 
 }
 
-
-
 static bool vkbKeepOn = false;
 static bool vkbActive = false;
 static bool vkeyRefresh=false;
 static bool exitVkbd = false;
 static uint8_t keyPressCount=0; 
-
 
 bool virtualkeyboardIsActive(void) {
     return (vkbActive);
@@ -565,7 +546,6 @@ void toggleVirtualkeyboard(bool keepOn) {
     }   
 }
 
- 
 void handleVirtualkeyboard() {
   int rx=0,ry=0,rw=0,rh=0;
 
@@ -617,9 +597,6 @@ void handleVirtualkeyboard() {
 
 int emu_setKeymap(int index) {
 }
-
-
-
 
 static int readNbFiles(void) {
   int totalFiles = 0;
@@ -680,8 +657,6 @@ static int readNbFiles(void) {
 #endif  
   return totalFiles;  
 }  
-
-
 
 void backgroundMenu(void) {
     menuRedraw=true;  
@@ -839,9 +814,6 @@ char * menuSelection(void)
 {
   return (selection);  
 }
-  
-
-
 
 static void callibrationInit(void) 
 {
@@ -855,7 +827,6 @@ static void callibrationInit(void)
   tft.drawTextNoDma(0,0, "+", RGBVAL16(0xff,0x00,0x00), RGBVAL16(0xff,0xff,0xff), true);
   prev_zt = 1;  
 }
-
 
 static void readCallibration(void) 
 {
@@ -925,13 +896,10 @@ static void writeCallibration(void)
   }  
 }
 
-
 bool callibrationActive(void) 
 {
   return (callibrationOn);
 }
-
-
 
 int handleCallibration(uint16_t bClick) {
   uint16_t xt=0;
@@ -1000,10 +968,6 @@ int handleCallibration(uint16_t bClick) {
     prev_zt = 0;
   }  
 }
-
-
-
-
 
 int emu_FileOpen(char * filename)
 {
@@ -1084,7 +1048,6 @@ unsigned char emu_FileGetc(void) {
   return c; 
 }
 
-
 void emu_FileClose(void)
 {
 #ifdef USE_SDFS
@@ -1138,7 +1101,6 @@ int emu_FileTell(void)
   return (50);
 #endif
 }
-
 
 int emu_LoadFile(char * filename, char * buf, int size)
 {
@@ -1335,7 +1297,6 @@ void emu_init(void)
   Serial.print("SD initialized, files found: ");
   Serial.println(nbFiles);
 
-  
   emu_InitJoysticks();
 #ifdef SWAP_JOYSTICK
   joySwapped = true;   
@@ -1352,7 +1313,6 @@ void emu_init(void)
     toggleMenu(true);
   }
 }
-
 
 void emu_start(void)
 {

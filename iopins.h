@@ -1,3 +1,4 @@
+#ifndef IOPINS_H
 #define IOPINS_H
 
 #include "platform_config.h"
@@ -13,3 +14,5 @@
 
 #define PIN_JOY2_A1X    0
 #define PIN_JOY2_A2Y    0
+
+#endif
